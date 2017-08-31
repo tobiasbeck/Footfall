@@ -44,75 +44,29 @@ void TrackingManager::update(Mat processedMat)
 	{
 		if (centerRect.inside(blobs[i].getCurrentPosition().x, blobs[i].getCurrentPosition().y) && !blobs[i]._evaluating)
 		{
+      int fac=0;
 			if (_flipVertically)
 			{
-				if (blobs[i].getCurrentPosition().y > blobs[i].getOriginPosition().y)
-				{
-					int noOfBlobs = 0;
-					int blobWidth = blobs[i].getWidth();
-					if (blobWidth > _threeBlob)
-					{
-						noOfBlobs = 3;
-					}
-					
-					if ((blobWidth > _twoBlob) && (blobWidth < _threeBlob))
-					{
-						noOfBlobs = 2;
-					}
-					
-					if ((blobWidth > _oneBlob) && (blobWidth < _twoBlob))
-					{
-						noOfBlobs = 1;
-					}
-					
-					
-					
-					trackingHistory.addNewData(blobs[i].getWidth(), true);
-					ofNotifyEvent(blobIn, noOfBlobs, this);
-					blobs[i].kill();
-				}
-				else if (blobs[i].getCurrentPosition().y < blobs[i].getOriginPosition().y)
-				{
-					int noOfBlobs = 0;
-					int blobWidth = blobs[i].getWidth();
-					if (blobWidth > _threeBlob)
-					{
-						noOfBlobs = -3;
-					}
-					
-					if ((blobWidth > _twoBlob) && (blobWidth < _threeBlob))
-					{
-						noOfBlobs = -2;
-					}
-					
-					if ((blobWidth > _oneBlob) && (blobWidth < _twoBlob))
-					{
-						noOfBlobs = -1;
-					}
-					
-					trackingHistory.addNewData(blobs[i].getWidth(), false);
-					ofNotifyEvent(blobOut, noOfBlobs, this);
-					blobs[i].kill();
-				}
-			}
-			else {
+        fac=-1;
+      }
+
 				if (blobs[i].getCurrentPosition().y < blobs[i].getOriginPosition().y)
 				{
 					int noOfBlobs = 0;
 					int blobWidth = blobs[i].getWidth();
 					if (blobWidth > _threeBlob)
 					{
-						noOfBlobs = 3;
+						noOfBlobs = fac*3;
 					}
 					
 					if ((blobWidth > _twoBlob) && (blobWidth < _threeBlob))
 					{
-						noOfBlobs = 2;
+						noOfBlobs = fac*2;
 					}
 					
 					if ((blobWidth > _oneBlob) && (blobWidth < _twoBlob))
 					{
-						noOfBlobs = 1;
+						noOfBlobs = fac*1;
 					}
 					
 					trackingHistory.addNewData(blobs[i].getWidth(), true);
@@ -125,24 +79,24 @@ void TrackingManager::update(Mat processedMat)
 					int blobWidth = blobs[i].getWidth();
 					if (blobWidth > _threeBlob)
 					{
-						noOfBlobs = -3;
+						noOfBlobs = fac*(-3);
 					}
 					
 					if ((blobWidth > _twoBlob) && (blobWidth < _threeBlob))
 					{
-						noOfBlobs = -2;
+						noOfBlobs = fac*(-2);
 					}
 					
 					if ((blobWidth > _oneBlob) && (blobWidth < _twoBlob))
 					{
-						noOfBlobs = -1;
+						noOfBlobs = fac*(-1);
 					}
 					
 					trackingHistory.addNewData(blobs[i].getWidth(), false);
 					ofNotifyEvent(blobOut, noOfBlobs, this);
 					blobs[i].kill();
 				}
-			}
+			
 			
 			blobs[i]._evaluating = true;
 		}
