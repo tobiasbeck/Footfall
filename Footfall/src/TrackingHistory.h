@@ -109,7 +109,7 @@ class TrackingHistory
 		int _midsize;
 		int _maxsize;
     int _startposy;
-    int _fac;
+
 	
 };
 
