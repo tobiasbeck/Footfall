@@ -97,7 +97,7 @@ void TrackingManager::update(Mat processedMat)
 					{
 						noOfBlobs = _fac*(-1);
 					}
-					
+					cout << blobWidth << " Blobsize";
 					trackingHistory.addNewData(blobs[i].getWidth(), false);
 					ofNotifyEvent(blobOut, noOfBlobs, this);
 					blobs[i].kill();
