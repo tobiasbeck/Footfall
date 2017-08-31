@@ -42,7 +42,7 @@ class Blob : public ofxCv::RectFollower
 			
 			ofDrawCircle(_currentPos, 5);
 			ofSetColor(255,0,0);
-			ofDrawCircle(_originPos, 10);
+			ofDrawCircle(_originPos, 5);
 			ofPopStyle();
 		}
 		//--------------------------------------------------------------

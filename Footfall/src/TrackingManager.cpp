@@ -21,7 +21,14 @@ void TrackingManager::setup(Tracking_Configuration _trackingConfig)
 	_flipVertically = _trackingConfig.flipvertically;
 	_historyLength = _trackingConfig.history;
 	_camerawidth = _trackingConfig.camerawidth;
-	_cameraheight = _trackingConfig.cameraheight;
+  _cameraheight = _trackingConfig.cameraheight;
+  
+  if(_flipVertically){
+    _fac=-1;
+  } else {
+    _fac=1;
+  }
+  
 	
 	trackingHistory.setup(_oneBlob,_twoBlob,_threeBlob,_trackingConfig.startPos.y);
 	
@@ -39,16 +46,15 @@ void TrackingManager::update(Mat processedMat)
 		}
 	}
 	
-	vector<Blob> &blobs = tracker.getFollowers();
+  vector<Blob> &blobs = tracker.getFollowers();
+  
+  
+
 	for(int i = 0; i < blobs.size(); i++)
 	{
 		if (centerRect.inside(blobs[i].getCurrentPosition().x, blobs[i].getCurrentPosition().y) && !blobs[i]._evaluating)
 		{
-      int fac=0;
-			if (_flipVertically)
-			{
-        fac=-1;
-      }
+      
 
 				if (blobs[i].getCurrentPosition().y < blobs[i].getOriginPosition().y)
 				{
@@ -56,17 +62,17 @@ void TrackingManager::update(Mat processedMat)
 					int blobWidth = blobs[i].getWidth();
 					if (blobWidth > _threeBlob)
 					{
-						noOfBlobs = fac*3;
+						noOfBlobs = _fac*3;
 					}
 					
 					if ((blobWidth > _twoBlob) && (blobWidth < _threeBlob))
 					{
-						noOfBlobs = fac*2;
+						noOfBlobs = _fac*2;
 					}
 					
 					if ((blobWidth > _oneBlob) && (blobWidth < _twoBlob))
 					{
-						noOfBlobs = fac*1;
+						noOfBlobs = _fac*1;
 					}
 					
 					trackingHistory.addNewData(blobs[i].getWidth(), true);
@@ -79,17 +85,17 @@ void TrackingManager::update(Mat processedMat)
 					int blobWidth = blobs[i].getWidth();
 					if (blobWidth > _threeBlob)
 					{
-						noOfBlobs = fac*(-3);
+						noOfBlobs = _fac*(-3);
 					}
 					
 					if ((blobWidth > _twoBlob) && (blobWidth < _threeBlob))
 					{
-						noOfBlobs = fac*(-2);
+						noOfBlobs = _fac*(-2);
 					}
 					
 					if ((blobWidth > _oneBlob) && (blobWidth < _twoBlob))
 					{
-						noOfBlobs = fac*(-1);
+						noOfBlobs = _fac*(-1);
 					}
 					
 					trackingHistory.addNewData(blobs[i].getWidth(), false);
