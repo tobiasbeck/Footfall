@@ -74,7 +74,7 @@ void TrackingManager::update(Mat processedMat)
 					{
 						noOfBlobs = _fac*1;
 					}
-					
+          cout << blobWidth << " Blobsize in" << endl;
 					trackingHistory.addNewData(blobs[i].getWidth(), true);
 					ofNotifyEvent(blobIn, noOfBlobs, this);
 					blobs[i].kill();
@@ -97,7 +97,7 @@ void TrackingManager::update(Mat processedMat)
 					{
 						noOfBlobs = _fac*(-1);
 					}
-					cout << blobWidth << " Blobsize";
+					cout << blobWidth << " Blobsize out" << endl;
 					trackingHistory.addNewData(blobs[i].getWidth(), false);
 					ofNotifyEvent(blobOut, noOfBlobs, this);
 					blobs[i].kill();
