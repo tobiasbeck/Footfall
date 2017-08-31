@@ -34,14 +34,14 @@ class Blob : public ofxCv::RectFollower
 			ofPushStyle();
 			
 			if(_evaluating) {
-				ofSetColor(255);
+				ofSetColor(255,0,200,255);
 			}
 			else {
 				ofSetColor(0,255,0);
 			}
 			
 			ofDrawCircle(_currentPos, 5);
-			ofSetColor(255,0,0);
+			//ofSetColor(255,0,0);
 			ofDrawCircle(_originPos, 5);
 			ofPopStyle();
 		}

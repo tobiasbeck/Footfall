@@ -11,9 +11,10 @@
 void ofApp::setup()
 {
 	ofSetVerticalSync(true);
-	ofSetFrameRate(25);
+  ofSetFrameRate(25);
+  ofSetWindowPosition(300, 300);
 	
-	cout << "-------------------- Footfall --------------------" << endl;
+	cout << "-------------------- Doorsensor --------------------" << endl;
 	
 	configManager.loadConfiguration("config.json");
 	
@@ -54,7 +55,7 @@ void ofApp::draw()
 	ofPopMatrix();
 	
 	stringstream ss;
-	ss << "Footfall" << endl;
+	ss << "Doorsensor" << endl;
 	ss << "People In: " << peopleIn;
 	ss << " People Out: " << peopleOut;
 	ss << " Tally: " << (peopleIn-peopleOut);
