@@ -117,7 +117,8 @@ void CameraManager::update()
 		if(_showShadows) copy(processedMog,unprocessed_MOG);
 		
 		// Image processing
-		threshold(processedMog,_threshold);
+    threshold(processedMog,_threshold);
+    copy(processedMog,unprocessed_MOG)
 		blur(processedMog,_blur);
 		dilate(processedMog,_dilateAmount);
 		erode(processedMog,_erodeAmount);
@@ -148,7 +149,10 @@ void CameraManager::draw()
 	{
 		drawMat(background, videoMatrix.cols*2, 0,videoMatrix.cols,videoMatrix.rows);
 		ofDrawBitmapStringHighlight("Background", ((videoMatrix.cols/2)*5)-45,videoMatrix.rows+20);
-	}
+  }
+  drawMat(unprocessed_MOG, videoMatrix.cols*3, 0,videoMatrix.cols,videoMatrix.rows);
+  ofDrawBitmapStringHighlight("After 1 treshold", ((videoMatrix.cols/2)*5)-45,videoMatrix.rows+20);
+
 	ofPopMatrix();
 }
 //--------------------------------------------------------------
