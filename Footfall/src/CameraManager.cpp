@@ -116,11 +116,12 @@ void CameraManager::update()
 		
 		//if(_showShadows) copy(processedMog,unprocessed_MOG);
 		
-		// Image processing
+    // Image processing
+    copy(processedMog,unprocessed_MOG);
     threshold(processedMog,_threshold);
 
     blur(processedMog,_blur);
-    copy(processedMog,unprocessed_MOG);
+
 		dilate(processedMog,_dilateAmount);
 		erode(processedMog,_erodeAmount);
 		dilate(processedMog,_dilateAmount);
