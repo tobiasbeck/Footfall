@@ -114,12 +114,13 @@ void CameraManager::update()
 		// If you want to see the effect of the shadow ratio threshold. Set the showshadow config to true
 		// Copy the MOG's output before processing the mat
 		
-		if(_showShadows) copy(processedMog,unprocessed_MOG);
+		//if(_showShadows) copy(processedMog,unprocessed_MOG);
 		
 		// Image processing
     threshold(processedMog,_threshold);
-    copy(processedMog,unprocessed_MOG)
-		blur(processedMog,_blur);
+
+    blur(processedMog,_blur);
+    copy(processedMog,unprocessed_MOG);
 		dilate(processedMog,_dilateAmount);
 		erode(processedMog,_erodeAmount);
 		dilate(processedMog,_dilateAmount);
@@ -151,7 +152,7 @@ void CameraManager::draw()
 		ofDrawBitmapStringHighlight("Background", ((videoMatrix.cols/2)*5)-45,videoMatrix.rows+20);
   }
   drawMat(unprocessed_MOG, videoMatrix.cols*3, 0,videoMatrix.cols,videoMatrix.rows);
-  ofDrawBitmapStringHighlight("After 1 treshold", ((videoMatrix.cols/2)*5)-45,videoMatrix.rows+20);
+  ofDrawBitmapStringHighlight("After 1st blur", ((videoMatrix.cols/3)*5)-45,videoMatrix.rows+20);
 
 	ofPopMatrix();
 }
